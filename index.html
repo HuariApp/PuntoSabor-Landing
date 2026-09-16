@@ -27,6 +27,38 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css?v=3">
+
+  <!--
+    Todos los CTAs de esta página apuntan a https://punto-sabor-front.vercel.app
+    (register o login). Son <a href> planos a propósito, para que funcionen
+    aunque falle el JS. Si cambia el dominio del front, actualizar ese link
+    en cada <a> de este archivo (buscar "punto-sabor-front.vercel.app").
+  -->
+  <style>
+    /* Link secundario de login junto al CTA de registro del header. */
+    .cta-login {
+      color: var(--seal-brown);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-login:hover,
+    .cta-login:focus-visible {
+      opacity: 1;
+      color: var(--cocoa-brown);
+    }
+
+    @media (max-width: 768px) {
+      .cta-login {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -92,10 +124,14 @@
           </button>
         </div>
 
-        <button class="cta-header" type="button" onclick="openModal()">
+        <a class="cta-login" href="https://punto-sabor-front.vercel.app/login">
+          <span data-translate="header_login">Iniciar sesión</span>
+        </a>
+
+        <a class="cta-header" href="https://punto-sabor-front.vercel.app/register">
           <i class="fas fa-user-plus" aria-hidden="true"></i>
           <span data-translate="header_register">Registrarse</span>
-        </button>
+        </a>
 
         <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-controls="navMenu" aria-expanded="false">
           <i class="fas fa-bars" aria-hidden="true"></i>
@@ -125,10 +161,10 @@
           </p>
 
           <div class="hero-ctas">
-            <button class="btn-primary" type="button" onclick="openModal()">
+            <a class="btn-primary" href="https://punto-sabor-front.vercel.app/register">
               <span data-translate="hero_cta_primary">Quiero descubrir huariques</span>
               <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </button>
+            </a>
 
             <a href="#servicios" class="btn-secondary">
               <span data-translate="hero_cta_secondary">Ver cómo funciona</span>
@@ -412,10 +448,10 @@
             <li><i class="fas fa-check-circle" aria-hidden="true"></i> <span data-translate="plan_basic_feature_5">Horarios y ubicación</span></li>
           </ul>
 
-          <button class="btn-primary" type="button" onclick="openModal()">
+          <a class="btn-primary" href="https://punto-sabor-front.vercel.app/register">
             <span data-translate="plan_basic_cta">Empezar gratis</span>
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </button>
+          </a>
         </div>
 
         <div class="price-card featured">
@@ -437,10 +473,10 @@
             <li><i class="fas fa-check-circle" aria-hidden="true"></i> <span data-translate="plan_premium_feature_6">3 publicaciones mensuales</span></li>
           </ul>
 
-          <button class="btn-primary" type="button" onclick="openModal()">
+          <a class="btn-primary" href="https://punto-sabor-front.vercel.app/register">
             <span data-translate="plan_premium_cta">Probar 15 días gratis</span>
             <i class="fas fa-rocket" aria-hidden="true"></i>
-          </button>
+          </a>
         </div>
 
         <div class="price-card">
@@ -457,10 +493,10 @@
             <li><i class="fas fa-check-circle" aria-hidden="true"></i> <span data-translate="plan_exclusive_feature_6">Publicaciones ilimitadas</span></li>
           </ul>
 
-          <button class="btn-primary" type="button" onclick="openModal()">
+          <a class="btn-primary" href="#contacto">
             <span data-translate="plan_exclusive_cta">Contactar ventas</span>
             <i class="fas fa-crown" aria-hidden="true"></i>
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -561,10 +597,10 @@
         </p>
 
         <div class="cta-buttons">
-          <button class="btn-primary" type="button" onclick="openModal()">
+          <a class="btn-primary" href="https://punto-sabor-front.vercel.app/register">
             <span data-translate="cta_final_primary">Quiero empezar gratis</span>
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </button>
+          </a>
 
           <a href="#planes" class="btn-secondary">
             <span data-translate="cta_final_secondary">Ver planes</span>
@@ -663,75 +699,6 @@
     </div>
   </footer>
 
-  <!-- MODAL -->
-  <div class="modal" id="registrationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-content">
-      <button class="modal-close" type="button" onclick="closeModal()" aria-label="Cerrar modal">
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </button>
-
-      <h2 id="modalTitle" data-translate="modal_title">¡Regístrate gratis!</h2>
-      <p class="subtitle" data-translate="modal_subtitle">Empieza a descubrir los mejores huariques hoy.</p>
-
-      <form id="registrationForm" novalidate>
-        <div class="form-group">
-          <label for="name">
-            <i class="fas fa-user" aria-hidden="true"></i>
-            <span data-translate="form_name">Nombre completo</span>
-          </label>
-
-          <div class="input-wrapper">
-            <input type="text" id="name" name="name" placeholder="Tu nombre" required autocomplete="name">
-            <i class="fas fa-user" aria-hidden="true"></i>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-            <span data-translate="form_email">Email</span>
-          </label>
-
-          <div class="input-wrapper">
-            <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="password">
-            <i class="fas fa-lock" aria-hidden="true"></i>
-            <span data-translate="form_password">Contraseña</span>
-          </label>
-
-          <div class="input-wrapper">
-            <input type="password" id="password" name="new-password" placeholder="Mínimo 8 caracteres" minlength="8" required autocomplete="new-password">
-            <i class="fas fa-lock" aria-hidden="true"></i>
-          </div>
-        </div>
-
-        <div class="checkbox-group">
-          <input type="checkbox" id="terms" required>
-          <label for="terms" data-translate="form_terms">Acepto los términos y condiciones</label>
-        </div>
-
-        <button type="submit" class="btn-primary form-submit-btn">
-          <span data-translate="form_submit">Crear cuenta gratis</span>
-          <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </button>
-
-        <p class="form-success" id="formSuccess" role="status" aria-live="polite"></p>
-
-        <div class="modal-footer">
-          <p>
-            <span data-translate="form_login_text">¿Ya tienes cuenta?</span>
-            <a href="#" data-translate="form_login_link">Inicia sesión</a>
-          </p>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <script>
     const translations = {
       es: {
@@ -743,6 +710,7 @@
         nav_testimonials: "Testimonios",
         nav_contact: "Contáctanos",
         header_register: "Registrarse",
+        header_login: "Iniciar sesión",
         hero_badge: "Sabores auténticos cerca de ti",
         hero_title_1: "Descubre los",
         hero_title_2: "Mejores Huariques",
@@ -846,17 +814,7 @@
         footer_location: "Lima, Perú",
         footer_rights: "Todos los derechos reservados",
         footer_privacy: "Privacidad",
-        footer_terms: "Términos",
-        modal_title: "¡Regístrate gratis!",
-        modal_subtitle: "Empieza a descubrir los mejores huariques hoy.",
-        form_name: "Nombre completo",
-        form_email: "Email",
-        form_password: "Contraseña",
-        form_terms: "Acepto los términos y condiciones",
-        form_submit: "Crear cuenta gratis",
-        form_success: "¡Registro exitoso! Te enviaremos un correo de confirmación.",
-        form_login_text: "¿Ya tienes cuenta?",
-        form_login_link: "Inicia sesión"
+        footer_terms: "Términos"
       },
 
       en: {
@@ -868,6 +826,7 @@
         nav_testimonials: "Testimonials",
         nav_contact: "Contact",
         header_register: "Sign up",
+        header_login: "Log in",
         hero_badge: "Authentic flavors near you",
         hero_title_1: "Discover the",
         hero_title_2: "Best Huariques",
@@ -971,22 +930,11 @@
         footer_location: "Lima, Peru",
         footer_rights: "All rights reserved",
         footer_privacy: "Privacy",
-        footer_terms: "Terms",
-        modal_title: "Sign up free!",
-        modal_subtitle: "Start discovering the best huariques today.",
-        form_name: "Full name",
-        form_email: "Email",
-        form_password: "Password",
-        form_terms: "I accept the terms and conditions",
-        form_submit: "Create free account",
-        form_success: "Registration successful! We will send you a confirmation email.",
-        form_login_text: "Already have an account?",
-        form_login_link: "Log in"
+        footer_terms: "Terms"
       }
     };
 
     let currentLang = "es";
-    let lastFocus = null;
 
     function changeLanguage(lang) {
       currentLang = lang;
@@ -1004,27 +952,6 @@
       });
 
       localStorage.setItem("preferredLang", lang);
-    }
-
-    function openModal() {
-      lastFocus = document.activeElement;
-
-      const modal = document.getElementById("registrationModal");
-      modal.classList.add("active");
-
-      document.body.style.overflow = "hidden";
-
-      const firstInput = modal.querySelector("input, button, a");
-      if (firstInput) firstInput.focus();
-    }
-
-    function closeModal() {
-      const modal = document.getElementById("registrationModal");
-      modal.classList.remove("active");
-
-      document.body.style.overflow = "";
-
-      if (lastFocus) lastFocus.focus();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -1158,36 +1085,6 @@
         card.style.transitionDelay = `${index * 0.08}s`;
       });
 
-      const registrationForm = document.getElementById("registrationForm");
-      const formSuccess = document.getElementById("formSuccess");
-
-      registrationForm?.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        if (!registrationForm.checkValidity()) {
-          registrationForm.reportValidity();
-          return;
-        }
-
-        formSuccess.textContent = translations[currentLang].form_success;
-        registrationForm.reset();
-
-        setTimeout(() => {
-          closeModal();
-          formSuccess.textContent = "";
-        }, 1800);
-      });
-
-      document.querySelectorAll("input[required]").forEach((input) => {
-        input.addEventListener("input", () => {
-          if (input.validity.valid) {
-            input.style.borderColor = "var(--yellow-green)";
-          } else {
-            input.style.borderColor = "";
-          }
-        });
-      });
-
       document.querySelectorAll(".btn-primary, .btn-secondary").forEach((button) => {
         button.addEventListener("click", function (e) {
           const ripple = document.createElement("span");
@@ -1208,19 +1105,6 @@
         });
       });
 
-      const registrationModal = document.getElementById("registrationModal");
-
-      registrationModal.addEventListener("click", (e) => {
-        if (e.target === registrationModal) {
-          closeModal();
-        }
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeModal();
-        }
-      });
     });
 
     console.log("%c🍽️ PuntoSabor", "font-size: 20px; font-weight: bold; color: #CA6527;");
